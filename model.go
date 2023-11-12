@@ -44,4 +44,5 @@ type FileSetting struct {
 	Legend                string //ej: Imágenes,Boletas etc
 	DefaultEnableInput    bool   // si se necesita habilitado resetear el campo por defecto falso
 
+	source *model.Object // objeto origen
 }
