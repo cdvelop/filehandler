@@ -1,0 +1,5 @@
+github.com/cdvelop/input v0.0.43 h1:z3yx5ALZdb4qq0pQvmmaXM9kxThyvm+X4AT3t1LMCDM=
+github.com/cdvelop/strings v0.0.3 h1:0EqLGFWoc/sP8TUKHhF+ZLMKh8bjvderV6sMf//cvSw=
+github.com/cdvelop/strings v0.0.3/go.mod h1:zNexDeXHRETbMmlmNThQeM7ksRsvzrphsCfwuSxaURk=
+github.com/cdvelop/timetools v0.0.9 h1:QgibYu0HH19MBycVj8yDumvW/jZ5kimekiodv9qgFwI=
+github.com/cdvelop/unixid v0.0.9 h1:QpbcRX3IKPQgdihTGj6QH/BeG+KLo4bW9DUCmvt23Uc=
