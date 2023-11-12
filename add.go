@@ -7,8 +7,17 @@ import (
 
 var f *FileHandler
 
+// root_folder default:app_files
 func Add(root_folder string, l model.Logger, dba model.DataBaseAdapter) (*FileHandler, error) {
 	if f == nil {
+		const e = "error en filehandler handler nil:"
+
+		if l == nil {
+			return nil, model.Error(e, "Logger")
+		}
+		if dba == nil {
+			return nil, model.Error(e, "DataBaseAdapter")
+		}
 
 		table := &fileTable{}
 
@@ -20,9 +29,13 @@ func Add(root_folder string, l model.Logger, dba model.DataBaseAdapter) (*FileHa
 		f = &FileHandler{
 			Logger:          l,
 			DataBaseAdapter: dba,
-			root_folder:     root_folder,
-			file_settings:   map[string]FileSetting{},
+			root_folder:     "app_files",
+			file_settings:   map[string]*FileSetting{},
 			fileTable:       table,
+		}
+
+		if root_folder != "" {
+			f.root_folder = root_folder
 		}
 
 		if !f.RunOnClientDB() { // verificamos la base de datos solo si estamos en el servidor

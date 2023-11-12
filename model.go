@@ -8,7 +8,7 @@ type FileHandler struct {
 
 	root_folder string // carpeta raíz de archivos
 	// nombre del api archivo y su configuración
-	file_settings map[string]FileSetting
+	file_settings map[string]*FileSetting
 
 	*fileTable
 }
@@ -35,8 +35,7 @@ type FileSetting struct {
 	ImagenWidth  string // ej: 800
 	ImagenHeight string // ej: 600
 
-	RootFolder string //ej: static_files default "app_files"
-	FileType   string // ej: imagen,video,document,pdf
+	FileType string // ej: imagen,video,document,pdf
 
 	//field
 	FieldNameWithObjectID string //ej: id_medicalhistory
@@ -44,5 +43,5 @@ type FileSetting struct {
 	Legend                string //ej: Imágenes,Boletas etc
 	DefaultEnableInput    bool   // si se necesita habilitado resetear el campo por defecto falso
 
-	source *model.Object // objeto origen
+	Source *model.Object // objeto origen
 }

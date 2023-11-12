@@ -2,13 +2,13 @@ package filehandler
 
 import "github.com/cdvelop/model"
 
-func (f *FileHandler) AddNewFileSetting(o *model.Object, fs FileSetting) {
+func (f *FileHandler) AddNewFileSetting(o *model.Object, fs *FileSetting) {
 	f.file_settings[o.Name] = fs
 }
 
 func (f *FileHandler) GetFileSettings(object_name string) (FileSetting, error) {
 	if config, exist := f.file_settings[object_name]; exist {
-		return config, nil
+		return *config, nil
 	}
 
 	return FileSetting{}, model.Error("configuración archivo:", object_name, "no encontrada")
