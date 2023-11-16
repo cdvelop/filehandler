@@ -1,53 +1,64 @@
 package filehandler
 
 import (
+	"github.com/cdvelop/input"
 	"github.com/cdvelop/model"
 	"github.com/cdvelop/object"
+	"github.com/cdvelop/unixid"
 )
 
 var f *FileHandler
 
-// root_folder default:app_files
-func Add(root_folder string, l model.Logger, dba model.DataBaseAdapter) (*FileHandler, error) {
+// optional root_folder default: "app_files"
+func Add(l model.Logger, db model.DataBaseAdapter, hdd model.FileDiskRW, root_folder ...string) (*FileHandler, error) {
+	var out_err error
 	if f == nil {
-		const e = "error en filehandler handler nil:"
 
-		if l == nil {
-			return nil, model.Error(e, "Logger")
+		inputs := []*model.Input{
+			unixid.InputPK(),
+			input.TextNumCode(),
+			input.TextNum(),
+			input.Text(),
 		}
-		if dba == nil {
-			return nil, model.Error(e, "DataBaseAdapter")
+
+		module := &model.Module{
+			ModuleName: "filehandler",
+			Title:      "Manejador de Archivos",
+			Objects:    []*model.Object{},
+			Inputs:     inputs,
 		}
 
-		table := &fileTable{}
+		table := &File{}
 
-		err := object.New(table)
+		object, err := object.BuildObjectFromStruct(true, table, module)
 		if err != nil {
 			return nil, err
 		}
 
 		f = &FileHandler{
+			object:          object,
+			table:           table,
 			Logger:          l,
-			DataBaseAdapter: dba,
+			DataBaseAdapter: db,
+			FileDiskRW:      hdd,
 			root_folder:     "app_files",
 			file_settings:   map[string]*FileSetting{},
-			fileTable:       table,
 		}
-
-		if root_folder != "" {
-			f.root_folder = root_folder
+		for _, v := range root_folder {
+			if v != "" {
+				f.root_folder = v
+			}
 		}
 
 		if !f.RunOnClientDB() { // verificamos la base de datos solo si estamos en el servidor
-			f.CreateTablesInDB([]*model.Object{table.Object}, func(err error) {
+			f.CreateTablesInDB([]*model.Object{object}, func(err error) {
 				if err != nil {
-					l.Log(err)
-					return
+					out_err = err
+					// fmt.Println("ESTAMOS EN SERVIDOR CREAMOS TABLA ", f.Object.Table, " EN DB CON ERROR", err)
 				}
 			})
-			// fmt.Println("ESTAMOS EN SERVIDOR CREAMOS TABLA ", f.Object.Table, " EN DB CON ERROR", err)
 		}
-
 	}
-	return f, nil
+
+	return f, out_err
 }
