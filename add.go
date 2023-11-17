@@ -14,6 +14,10 @@ func Add(l model.Logger, db model.DataBaseAdapter, hdd model.FileDiskRW, root_fo
 	var out_err error
 	if f == nil {
 
+		if hdd == nil {
+			return nil, model.Error("error filehandler FileDiskRW nil")
+		}
+
 		inputs := []*model.Input{
 			unixid.InputPK(),
 			input.TextNumCode(),
@@ -36,7 +40,7 @@ func Add(l model.Logger, db model.DataBaseAdapter, hdd model.FileDiskRW, root_fo
 		}
 
 		f = &FileHandler{
-			object:          object,
+			Object:          object,
 			table:           table,
 			Logger:          l,
 			DataBaseAdapter: db,

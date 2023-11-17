@@ -7,12 +7,12 @@ import (
 func (f FileHandler) Delete(u *model.User, params ...map[string]string) ([]map[string]string, error) {
 
 	// fmt.Println("parámetros Delete recibidos:", params)
-	recover_data, err := f.ReadObjectsInDB(f.object.Table, params...)
+	recover_data, err := f.ReadObjectsInDB(f.Table, params...)
 	if err != nil {
 		return nil, err
 	}
 
-	err = f.DeleteObjectsInDB(f.object.Table, params...)
+	err = f.DeleteObjectsInDB(f.Table, params...)
 	if err != nil {
 		return nil, err
 	}

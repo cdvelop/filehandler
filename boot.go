@@ -21,7 +21,7 @@ func (f FileHandler) AddBootFiles(u *model.User, o *model.Object, from_data []ma
 	}
 
 	if len(our_files) >= 1 {
-		*out = append(*out, f.object.Response(our_files))
+		*out = append(*out, f.Response(our_files))
 	}
 	// fmt.Println("ARCHIVOS LEÍDOS:", len(our_files))
 

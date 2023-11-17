@@ -3,8 +3,8 @@ package filehandler
 import "github.com/cdvelop/model"
 
 type FileHandler struct {
-	object *model.Object
-	table  *File
+	*model.Object
+	table *File
 
 	model.Logger
 	model.DataBaseAdapter
@@ -26,23 +26,21 @@ type File struct {
 }
 
 type FileSetting struct {
-	MaximumFilesAllowed int64 // numero máximo de archivos permitidos ej: 4,100 etc
-	MaximumKbSize       int64 // tamaño máximo individual kb ej: 100
-	// OCULTAR
+	AllowedExtensions   []string // exenciones permitidas ej: ".jpg, .png, .jpeg"
+	MaximumFilesAllowed int64    // numero máximo de archivos permitidos ej: 4,100 etc
+	MaximumKbSize       int64    // tamaño máximo individual kb ej: 100
+
 	maximumFileSize int64 // tamaño máximo de todos los archivos
 
 	ImagenWidth  string // ej: 800
 	ImagenHeight string // ej: 600
 
-	FileType string // ej: imagen,video,document,pdf
-	// OCULTAR
-	allowedExtensions []string // exenciones permitidas ej: ".jpg, .png, .jpeg"
-
 	//field
 	FieldNameWithObjectID string //ej: id_medicalhistory
-	DescriptiveName       string //ej: endoscopia, pictures
+	ModuleName            string // ej: user,patients
+	DescriptiveName       string //ej: endoscopia, pictures documents
 	Legend                string //ej: Imágenes,Boletas etc
 	DefaultEnableInput    bool   // si se necesita habilitado resetear el campo por defecto falso
 
-	Source *model.Object // objeto origen
+	// Source *model.Object // objeto modulo origen
 }

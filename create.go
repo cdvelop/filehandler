@@ -8,11 +8,6 @@ type FileRegisterAdapter interface {
 
 func (f FileHandler) FileRegisterInDB(t *File) (map[string]string, error) {
 
-	// cortar el nombre del archivo para eliminar la extensión antes de almacenarlo
-	if len(t.Description) > 5 {
-		t.Description = t.Description[:len(t.Description)-len(t.Extension)]
-	}
-
 	form_data, err := maps.BuildFormString(t)
 	if err != nil {
 		return nil, err
