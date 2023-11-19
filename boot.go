@@ -1,9 +1,12 @@
 package filehandler
 
-import "github.com/cdvelop/model"
+import (
+	"github.com/cdvelop/model"
+)
 
 func (f FileHandler) AddBootFiles(u *model.User, o *model.Object, from_data []map[string]string, out *[]model.Response) error {
 
+	// fmt.Println(" 1 EJECUTANDO AddBootFiles")
 	pk_name := o.PrimaryKeyName()
 
 	field_ids := []map[string]string{}

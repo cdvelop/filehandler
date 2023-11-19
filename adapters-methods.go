@@ -12,7 +12,7 @@ type FolderPathAdapter interface {
 }
 
 func (f *FileHandler) AddNewFileSetting(o *model.Object, fs *FileSetting) {
-	f.file_settings[o.Name] = fs
+	f.file_settings[o.ObjectName] = fs
 }
 
 func (f FileHandler) GetFileSettings(object_name string) (*FileSetting, error) {

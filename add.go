@@ -1,6 +1,8 @@
 package filehandler
 
 import (
+	"fmt"
+
 	"github.com/cdvelop/input"
 	"github.com/cdvelop/model"
 	"github.com/cdvelop/object"
@@ -10,11 +12,11 @@ import (
 var f *FileHandler
 
 // optional root_folder default: "app_files"
-func Add(l model.Logger, db model.DataBaseAdapter, hdd model.FileDiskRW, root_folder ...string) (*FileHandler, error) {
+func Add(h *model.Handlers) (*FileHandler, error) {
 	var out_err error
 	if f == nil {
 
-		if hdd == nil {
+		if h.FileDiskRW == nil {
 			return nil, model.Error("error filehandler FileDiskRW nil")
 		}
 
@@ -39,29 +41,43 @@ func Add(l model.Logger, db model.DataBaseAdapter, hdd model.FileDiskRW, root_fo
 			return nil, err
 		}
 
+		// agregamos el objeto al manejador central
+		h.AddObjects(object)
+
 		f = &FileHandler{
 			Object:          object,
 			table:           table,
-			Logger:          l,
-			DataBaseAdapter: db,
-			FileDiskRW:      hdd,
+			Logger:          h.Logger,
+			DataBaseAdapter: h.DataBaseAdapter,
+			FileDiskRW:      h.FileDiskRW,
 			root_folder:     "app_files",
 			file_settings:   map[string]*FileSetting{},
 		}
-		for _, v := range root_folder {
-			if v != "" {
-				f.root_folder = v
-			}
+
+		if h.FileRootFolder != "" {
+			f.root_folder = h.FileRootFolder
+		} else {
+			h.FileRootFolder = f.root_folder
 		}
 
 		if !f.RunOnClientDB() { // verificamos la base de datos solo si estamos en el servidor
 			f.CreateTablesInDB([]*model.Object{object}, func(err error) {
 				if err != nil {
 					out_err = err
-					// fmt.Println("ESTAMOS EN SERVIDOR CREAMOS TABLA ", f.Object.Table, " EN DB CON ERROR", err)
+					fmt.Println("ESTAMOS CREANDO TABLA ", f.Object.Table, " EN DB ERROR:", err)
 				}
 			})
 		}
+	}
+
+	if f.Logger == nil {
+		return nil, model.Error("filehandler error Logger == nil")
+	}
+	if f.DataBaseAdapter == nil {
+		return nil, model.Error("filehandler error DataBaseAdapter == nil")
+	}
+	if f.FileDiskRW == nil {
+		return nil, model.Error("filehandler error FileDiskRW == nil")
 	}
 
 	return f, out_err
