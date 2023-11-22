@@ -3,11 +3,11 @@ module github.com/cdvelop/filehandler
 go 1.20
 
 require (
-	github.com/cdvelop/model v0.0.69
+	github.com/cdvelop/model v0.0.70
 	github.com/cdvelop/object v0.0.25
 )
 
-require github.com/cdvelop/timetools v0.0.9 // indirect
+require github.com/cdvelop/timetools v0.0.19 // indirect
 
 require (
 	github.com/cdvelop/input v0.0.52

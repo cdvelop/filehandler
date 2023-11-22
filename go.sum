@@ -1,5 +1,5 @@
 github.com/cdvelop/timeserver v0.0.1 h1:QVwLAvuNGAokKsj71E2hOwe9KHpZ1p7MrzM1BfkAbrU=
-github.com/cdvelop/timetools v0.0.9 h1:QgibYu0HH19MBycVj8yDumvW/jZ5kimekiodv9qgFwI=
-github.com/cdvelop/timetools v0.0.9/go.mod h1:RwKMHg37rbsOFORt6vpXwbWU9AtAnkoen5Iy+mInN4o=
+github.com/cdvelop/timetools v0.0.19 h1:RPMQcMIgMDWX4b+1Cq+7LH9jG6QN6vULoRLUMKRJ+IQ=
+github.com/cdvelop/timetools v0.0.19/go.mod h1:svILBZThmFShQv0CqZJJ/avxZ9KiVj6WES/utD7PDAg=
 github.com/cdvelop/unixid v0.0.18 h1:by7QfCHdI1odbsEK+ivPOmAeZ1PypDDNKvszvJWQjVI=
 github.com/cdvelop/unixid v0.0.18/go.mod h1:sHSKiSJMcbUheQTVWOCfSW7+QPxVKABQvlljYeWB+m8=
