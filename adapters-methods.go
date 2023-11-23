@@ -15,12 +15,12 @@ func (f *FileHandler) AddNewFileSetting(o *model.Object, fs *FileSetting) {
 	f.file_settings[o.ObjectName] = fs
 }
 
-func (f FileHandler) GetFileSettings(object_name string) (*FileSetting, error) {
+func (f FileHandler) GetFileSettings(object_name string) (s *FileSetting, err string) {
 	if config, exist := f.file_settings[object_name]; exist {
-		return config, nil
+		return config, ""
 	}
 
-	return nil, model.Error("configuración archivo:", object_name, "no encontrada")
+	return nil, "configuración archivo: " + object_name + " no encontrada"
 }
 
 func (f FileHandler) BuildFilePath(data map[string]string) (file_path, area string) {

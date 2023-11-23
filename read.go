@@ -4,12 +4,12 @@ import (
 	"github.com/cdvelop/model"
 )
 
-func (f FileHandler) Read(u *model.User, params ...map[string]string) ([]map[string]string, error) {
+func (f FileHandler) Read(u *model.User, params ...map[string]string) (result []map[string]string, err string) {
 
 	// fmt.Println("file: parámetros lectura recibidos:", params, "tamaño", len(params))
 
 	if len(params) == 0 {
-		return nil, model.Error("error filehandler Read: no hay parámetros de lectura recibidos")
+		return nil, "error filehandler Read: no hay parámetros de lectura recibidos"
 	}
 
 	// for _, v := range params {
@@ -17,22 +17,17 @@ func (f FileHandler) Read(u *model.User, params ...map[string]string) ([]map[str
 	// }
 
 	data, err := f.ReadObjectsInDB(f.Table, params...)
-	if err != nil {
+	if err != "" {
 		return nil, err
 	}
 	// fmt.Println("data devuelta:", data)
 
-	return data, nil
+	return data, ""
 }
 
-func (f FileHandler) ReadByID(id string) ([]map[string]string, error) {
+func (f FileHandler) ReadByID(id string) (result []map[string]string, err string) {
 
-	data, err := f.ReadObjectsInDB(f.Table, map[string]string{
+	return f.ReadObjectsInDB(f.Table, map[string]string{
 		f.table.Id_file: id,
 	})
-	if err != nil {
-		return nil, err
-	}
-
-	return data, nil
 }

@@ -4,7 +4,7 @@ import (
 	"github.com/cdvelop/model"
 )
 
-func (f FileHandler) AddBootFiles(u *model.User, o *model.Object, from_data []map[string]string, out *[]model.Response) error {
+func (f FileHandler) AddBootFiles(u *model.User, o *model.Object, from_data []map[string]string, out *[]model.Response) (err string) {
 
 	// fmt.Println(" 1 EJECUTANDO AddBootFiles")
 	pk_name := o.PrimaryKeyName()
@@ -19,7 +19,7 @@ func (f FileHandler) AddBootFiles(u *model.User, o *model.Object, from_data []ma
 	}
 
 	our_files, err := f.Read(u, field_ids...)
-	if err != nil {
+	if err != "" {
 		return err
 	}
 
@@ -28,5 +28,5 @@ func (f FileHandler) AddBootFiles(u *model.User, o *model.Object, from_data []ma
 	}
 	// fmt.Println("ARCHIVOS LEÍDOS:", len(our_files))
 
-	return nil
+	return ""
 }

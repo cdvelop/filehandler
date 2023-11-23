@@ -12,12 +12,12 @@ import (
 var f *FileHandler
 
 // optional root_folder default: "app_files"
-func Add(h *model.Handlers) (*FileHandler, error) {
-	var out_err error
+func Add(h *model.Handlers) (out *FileHandler, err string) {
+	var out_err string
 	if f == nil {
 
 		if h.FileDiskRW == nil {
-			return nil, model.Error("error filehandler FileDiskRW nil")
+			return nil, "error filehandler FileDiskRW nil"
 		}
 
 		inputs := []*model.Input{
@@ -37,7 +37,7 @@ func Add(h *model.Handlers) (*FileHandler, error) {
 		table := &File{}
 
 		object, err := object.BuildObjectFromStruct(true, table, module)
-		if err != nil {
+		if err != "" {
 			return nil, err
 		}
 
@@ -61,8 +61,8 @@ func Add(h *model.Handlers) (*FileHandler, error) {
 		}
 
 		if !f.RunOnClientDB() { // verificamos la base de datos solo si estamos en el servidor
-			f.CreateTablesInDB([]*model.Object{object}, func(err error) {
-				if err != nil {
+			f.CreateTablesInDB([]*model.Object{object}, func(err string) {
+				if err != "" {
 					out_err = err
 					fmt.Println("ESTAMOS CREANDO TABLA ", f.Object.Table, " EN DB ERROR:", err)
 				}
@@ -71,13 +71,13 @@ func Add(h *model.Handlers) (*FileHandler, error) {
 	}
 
 	if f.Logger == nil {
-		return nil, model.Error("filehandler error Logger == nil")
+		return nil, "filehandler error Logger == nil"
 	}
 	if f.DataBaseAdapter == nil {
-		return nil, model.Error("filehandler error DataBaseAdapter == nil")
+		return nil, "filehandler error DataBaseAdapter == nil"
 	}
 	if f.FileDiskRW == nil {
-		return nil, model.Error("filehandler error FileDiskRW == nil")
+		return nil, "filehandler error FileDiskRW == nil"
 	}
 
 	return f, out_err

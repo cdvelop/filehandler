@@ -4,7 +4,7 @@ import (
 	"github.com/cdvelop/model"
 )
 
-func (f FileHandler) Update(u *model.User, data ...map[string]string) error {
+func (f FileHandler) Update(u *model.User, data ...map[string]string) (err string) {
 
 	// fmt.Println("UPDATE DATA:", data)
 
