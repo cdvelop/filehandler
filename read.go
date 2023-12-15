@@ -16,7 +16,7 @@ func (f FileHandler) Read(u *model.User, params ...map[string]string) (result []
 	// 	v["SELECT"] = f.Id_file + ","+ f.Folder_id + "," + f.Description
 	// }
 
-	data, err := f.ReadSyncDataDB(f.Table, params...)
+	data, err := f.ReadSyncDataDB(model.ReadParams{FROM_TABLE: f.Table}, params...)
 	if err != "" {
 		return nil, err
 	}
@@ -27,7 +27,7 @@ func (f FileHandler) Read(u *model.User, params ...map[string]string) (result []
 
 func (f FileHandler) ReadByID(id string) (result []map[string]string, err string) {
 
-	return f.ReadSyncDataDB(f.Table, map[string]string{
+	return f.ReadSyncDataDB(model.ReadParams{FROM_TABLE: f.Table}, map[string]string{
 		f.table.Id_file: id,
 	})
 }
