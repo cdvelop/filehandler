@@ -12,7 +12,7 @@ import (
 var f *FileHandler
 
 // optional root_folder default: "app_files"
-func Add(h *model.Handlers) (out *FileHandler, err string) {
+func Add(h *model.MainHandler) (out *FileHandler, err string) {
 	var out_err string
 	if f == nil {
 
@@ -42,7 +42,7 @@ func Add(h *model.Handlers) (out *FileHandler, err string) {
 		}
 
 		// agregamos el objeto al manejador central
-		h.AddObjects(object)
+		h.AddModules(object.Module)
 
 		f = &FileHandler{
 			Object:          object,
