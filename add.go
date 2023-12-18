@@ -42,7 +42,7 @@ func Add(h *model.MainHandler) (out *FileHandler, err string) {
 		}
 
 		// agregamos el objeto al manejador central
-		h.AddModules(object.Module)
+		h.MainHandlerAddModules(object.Module)
 
 		f = &FileHandler{
 			Object:          object,

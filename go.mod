@@ -3,11 +3,11 @@ module github.com/cdvelop/filehandler
 go 1.20
 
 require (
-	github.com/cdvelop/input v0.0.75
+	github.com/cdvelop/input v0.0.77
 	github.com/cdvelop/maps v0.0.8
-	github.com/cdvelop/model v0.0.103
-	github.com/cdvelop/object v0.0.62
-	github.com/cdvelop/unixid v0.0.44
+	github.com/cdvelop/model v0.0.104
+	github.com/cdvelop/object v0.0.64
+	github.com/cdvelop/unixid v0.0.46
 )
 
 require (
