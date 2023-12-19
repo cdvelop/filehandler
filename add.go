@@ -30,7 +30,6 @@ func Add(h *model.MainHandler) (out *FileHandler, err string) {
 		module := &model.Module{
 			ModuleName: "filehandler",
 			Title:      "Manejador de Archivos",
-			Objects:    []*model.Object{},
 			Inputs:     inputs,
 		}
 
@@ -42,7 +41,7 @@ func Add(h *model.MainHandler) (out *FileHandler, err string) {
 		}
 
 		// agregamos el objeto al manejador central
-		h.MainHandlerAddModules(object.Module)
+		h.AddModules(object.Module)
 
 		f = &FileHandler{
 			Object:          object,
