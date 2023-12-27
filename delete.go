@@ -27,11 +27,14 @@ func (f FileHandler) Delete(u *model.User, params ...map[string]string) (err str
 
 		file_path, _ := f.BuildFilePath(data)
 
+		// fmt.Println("file_path ", file_path)
 		// Borrar archivos desde hdd
 		err := f.FileDelete(file_path)
 		if err != "" {
 			return "archivo " + data[f.table.Field_name] + " fue eliminado de la db pero no del hdd " + err
 		}
+
+		// fmt.Println("FileDelete err", err)
 
 		// agregar campos a la data de entrada para retornarla
 		for k, v := range data {

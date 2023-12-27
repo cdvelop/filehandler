@@ -23,3 +23,7 @@ func (f FileHandler) FileRegisterInDB(t *File) (out map[string]string, err strin
 		f.table.Description: form_data[f.table.Description],
 	}, ""
 }
+
+func (f FileHandler) CreateFormFile(new_data map[string]string) {
+
+}
