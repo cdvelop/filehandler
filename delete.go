@@ -34,7 +34,7 @@ func (f FileHandler) Delete(u *model.User, params ...map[string]string) (err str
 
 func (f FileHandler) DeleteFileFromHDDandDB(recover_data ...map[string]string) (err string) {
 
-	err = f.DeleteObjectsInDB(f.Table, recover_data...)
+	err = f.DeleteObjectsInDB(f.Table, false, recover_data...)
 	if err != "" {
 		return err
 	}

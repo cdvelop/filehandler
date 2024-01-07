@@ -8,5 +8,5 @@ func (f FileHandler) Update(u *model.User, data ...map[string]string) (err strin
 
 	// fmt.Println("UPDATE DATA:", data)
 
-	return f.UpdateObjectsInDB(f.Table, data...)
+	return f.UpdateObjectsInDB(f.Table, true, data...)
 }
