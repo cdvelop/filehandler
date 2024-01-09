@@ -5,20 +5,21 @@ import (
 )
 
 func (f FileHandler) Delete(u *model.User, params ...map[string]string) (err string) {
+	const e = "filehandler Delete "
 	// fmt.Println("parámetros Delete recibidos:", params)
 	recover_data, err := f.ReadSyncDataDB(model.ReadParams{FROM_TABLE: f.Table}, params...)
 	if err != "" {
-		return "error Delete al recuperar data anterior " + err
+		return e + "al recuperar data anterior " + err
 	}
 	// fmt.Println("DATA RECOBRADA:", recover_data)
 
 	if len(recover_data) == 0 {
-		return "el archivo ya no existe en la base de datos"
+		return e + "el archivo ya no existe en la base de datos"
 	}
 
 	err = f.DeleteFileFromHDDandDB(recover_data...)
 	if err != "" {
-		return err
+		f.Log(e + err)
 	}
 
 	// agregar campos recover_data a params para retornarla

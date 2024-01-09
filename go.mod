@@ -5,8 +5,8 @@ go 1.20
 require (
 	github.com/cdvelop/input v0.0.83
 	github.com/cdvelop/maps v0.0.8
-	github.com/cdvelop/model v0.0.113
-	github.com/cdvelop/object v0.0.71
+	github.com/cdvelop/model v0.0.115
+	github.com/cdvelop/object v0.0.72
 	github.com/cdvelop/unixid v0.0.49
 )
 
