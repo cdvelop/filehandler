@@ -7,7 +7,7 @@ import (
 func (f FileHandler) Delete(u *model.User, params ...map[string]string) (err string) {
 	const e = "filehandler Delete "
 	// fmt.Println("parámetros Delete recibidos:", params)
-	recover_data, err := f.ReadSyncDataDB(model.ReadParams{FROM_TABLE: f.Table}, params...)
+	recover_data, err := f.ReadSyncDataDB(&model.ReadParams{FROM_TABLE: f.Table}, params...)
 	if err != "" {
 		return e + "al recuperar data anterior " + err
 	}
